@@ -22,8 +22,19 @@ public class Main {
 
         // Client logic:
         
+        Scanner scan = new Scanner(System.in);
 
+        String text;
+        do {
+            System.out.print("Inserisci un equazione: ");
+            text = scan.nextLine();
+            out.println(text);
 
+            System.out.println("Risposta dal server: " + in.readLine());
+
+        } while (!text.equals("exit"));
+
+        scan.close();
         s.close();
         
         System.out.println("Disconnected!");

@@ -1,12 +1,8 @@
 package dev.lieno;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -44,7 +40,9 @@ public class Main {
             else if(text.contains("*"))
                 result = calc(text, "*");
             else
-                out.println("Error");
+                result = "Error!";
+
+            out.println(result);
 
         } while (!text.equals("exit"));
         
@@ -54,6 +52,17 @@ public class Main {
     }
 
     static private String calc(String in, String operator) {
-        return Double.toString(Double.parseDouble(in.split(operator)[0]) + Double.parseDouble(in.split(operator)[1]));
+        Double num1 = Double.parseDouble(in.split("["+operator+"]")[0]);
+        Double num2 = Double.parseDouble(in.split("["+operator+"]")[1]);
+
+        return  Double.toString(
+            switch(operator) {
+                case "+" -> num1 + num2;
+                case "-" -> num1 - num2;
+                case "/" -> num1 / num2;
+                case "*" -> num1 * num2;
+                default -> 0;
+            }
+        );
     }
 }
