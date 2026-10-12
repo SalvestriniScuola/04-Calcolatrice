@@ -29,9 +29,31 @@ public class Main {
 
         // Server logic:
         
+        String text;
+        do {
+            text = in.readLine();
+            
+            String result;
+            
+            if(text.contains("+"))
+                result = calc(text, "+");
+            else if(text.contains("-"))
+                result = calc(text, "-");
+            else if(text.contains("/"))
+                result = calc(text, "/");
+            else if(text.contains("*"))
+                result = calc(text, "*");
+            else
+                out.println("Error");
+
+        } while (!text.equals("exit"));
         
 
         System.out.println("Client disconnected.");
         ss.close();
+    }
+
+    static private String calc(String in, String operator) {
+        return Double.toString(Double.parseDouble(in.split(operator)[0]) + Double.parseDouble(in.split(operator)[1]));
     }
 }
